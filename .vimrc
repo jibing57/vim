@@ -198,7 +198,10 @@ Bundle 'majutsushi/tagbar'
 "     
 " see :h vundle for more details or wiki for FAQ   
 " NOTE: comments after Bundle command are not allowed..  
-"
+
+" vundle配置必须 开启插件
+filetype plugin indent on
+
 
 " 配置自己的leader命令为,避免同插件里面的\相冲突
 let mapleader = ","
@@ -270,7 +273,7 @@ set smartcase                                         "如果搜索模式包含�
 " set noincsearch                                       "在输入要搜索的文字时，取消实时匹配
  
 " 每行超过80个的字符用下划线标示
-au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
+" au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
 
 " -----------------------------------------------------------------------------
@@ -300,10 +303,11 @@ map k gk
 
 " -- 窗口操作,用来切换各个窗口
 " 在各个窗口中进行切换 
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" 下面 minibufexplorer 中已经有相关映射了
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 
 " --- buffer 操作
@@ -473,7 +477,7 @@ set shortmess=atI                                     "去掉欢迎界面
  
 " 个性化状栏（这里提供两种方式，要使用其中一种去掉注释即可，不使用反之）
 " let &statusline=' %t %{&mod?(&ro?"*":"+"):(&ro?"=":" ")} %1*|%* %{&ft==""?"any":&ft} %1*|%* %{&ff} %1*|%* %{(&fenc=="")?&enc:&fenc}%{(&bomb?",BOM":"")} %1*|%* %=%1*|%* 0x%B %1*|%* (%l,%c%V) %1*|%* %L %1*|%* %P'
- set statusline=%t\ %1*%m%*\ %1*%r%*\ %2*%h%*%w%=%l%3*/%L(%p%%)%*,%c%V]\ [%b:0x%B]\ [%{&ft==''?'TEXT':toupper(&ft)},%{toupper(&ff)},%{toupper(&fenc!=''?&fenc:&enc)}%{&bomb?',BOM':''}%{&eol?'':',NOEOL'}]
+" set statusline=%t\ %1*%m%*\ %1*%r%*\ %2*%h%*%w%=%l%3*/%L(%p%%)%*,%c%V]\ [%b:0x%B]\ [%{&ft==''?'TEXT':toupper(&ft)},%{toupper(&ff)},%{toupper(&fenc!=''?&fenc:&enc)}%{&bomb?',BOM':''}%{&eol?'':',NOEOL'}]
  
 " 显示/隐藏菜单栏、工具栏、滚动条，可用 Ctrl + F11 切换
 if g:isGUI
@@ -730,6 +734,13 @@ let Tlist_Use_Right_Window=1                "在右侧窗口中显示
 nmap <F2> :NERDTreeToggle<CR>
 imap <F2> <ESC>:NERDTreeToggle<CR>
 " let NERDTreeIgnore += ['\.o$', '\.pyc$']    "添加不显示.o文件
+if exists("NERDTreeIgnore")
+    let NERDTreeIgnore += ['\.o$', '\.pyc$']
+else
+    let NERDTreeIgnore = ['\.o$', '\.pyc$']
+endif
+let NERDTreeIgnore += ['\.swp$']
+
 
 
 
