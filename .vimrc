@@ -151,41 +151,43 @@ Bundle 'gmarik/vundle'
 " 已经知道如何使用的插件
 Bundle 'a.vim'
 Bundle 'taglist.vim'
-Bundle 'wincent/Command-T'
+" Bundle 'wincent/Command-T' "被ctrlp替代了，CommandT还需要ruby编译，太依赖其他环境
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/syntastic'
 
 " 正在试验的插件
+" https://github.com/jistr/vim-nerdtree-tabs  打开新标签时，也能自动打开 NerdTree 需要好好看一下
 
-
-"还没有消化的插件
-Bundle 'bufexplorer.zip'
-Bundle 'c.vim'
-Bundle 'csExplorer.vim'
-Bundle 'Align'
-Bundle 'ccvext.vim'
-Bundle 'cSyntaxAfter'
-Bundle 'repeat.vim'
-Bundle 'std_c.zip'
-Bundle 'TxtBrowser'
-" Bundle 'winmanager'
-Bundle 'ZoomWin'
-" Bundle 'minibufexpl.vim'
-
-"original repos on github（Github网站上非vim-scripts仓库的插件，按下面格式填写） 
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'Yggdroot/indentLine'
-" Bundle 'breestealth/Mark-Karkat'
-" Bundle 'fholgado/minibufexpl.vim' "这个上的6.4.4版本与 Vundle 插件有一些冲突
-Bundle 'Shougo/neocomplcache'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'FromtonRouge/OmniCppComplete'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'msanders/snipmate.vim'
-Bundle 'wesleyche/SrcExpl'
-" Bundle 'ervandew/supertab'
-Bundle 'tpope/vim-surround'
-Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
+" 还需要看的插件
+"""""""还没有消化的插件
+""""""Bundle 'bufexplorer.zip'
+""""""Bundle 'c.vim'
+""""""Bundle 'csExplorer.vim'
+""""""Bundle 'Align'
+""""""Bundle 'ccvext.vim'
+""""""Bundle 'cSyntaxAfter'
+""""""Bundle 'repeat.vim'
+""""""Bundle 'std_c.zip'
+""""""Bundle 'TxtBrowser'
+""""""" Bundle 'winmanager'
+""""""Bundle 'ZoomWin'
+""""""" Bundle 'minibufexpl.vim'
+""""""
+"""""""original repos on github（Github网站上非vim-scripts仓库的插件，按下面格式填写） 
+""""""Bundle 'jiangmiao/auto-pairs'
+""""""Bundle 'Yggdroot/indentLine'
+""""""" Bundle 'breestealth/Mark-Karkat'
+""""""" Bundle 'fholgado/minibufexpl.vim' "这个上的6.4.4版本与 Vundle 插件有一些冲突
+""""""Bundle 'Shougo/neocomplcache'
+""""""Bundle 'FromtonRouge/OmniCppComplete'
+""""""Bundle 'Lokaltog/vim-powerline'
+""""""Bundle 'msanders/snipmate.vim'
+""""""Bundle 'wesleyche/SrcExpl'
+""""""" Bundle 'ervandew/supertab'
+""""""Bundle 'tpope/vim-surround'
+""""""Bundle 'majutsushi/tagbar'
  
 " non github repos   (非上面两种情况的，按下面格式填写)
 " Bundle 'git://git.wincent.com/command-t.git' 
@@ -716,7 +718,7 @@ let Tlist_Use_Right_Window=1                "在右侧窗口中显示
 " -----------------------------------------------------------------------------
 "  < Command-T 插件配置 >
 " -----------------------------------------------------------------------------
-"  该插件貌似不需要什么配置，安装后直接能用
+"  该插件貌似不需要什么配置，安装后直接能用,输入CommandT就可以进行查找
 
 " -----------------------------------------------------------------------------
 "  < nerdtree 插件配置 >
@@ -740,6 +742,42 @@ else
     let NERDTreeIgnore = ['\.o$', '\.pyc$']
 endif
 let NERDTreeIgnore += ['\.swp$']
+
+" -----------------------------------------------------------------------------
+"  < nerdcommenter 插件配置 >
+" -----------------------------------------------------------------------------
+" 我主要用于C/C++代码注释(其它的也行)，这个插件我做了小点修改，也就是在注释符
+" 与注释内容间加一个空格
+" 以下为插件默认快捷键，其中的说明是以C/C++为例的
+" <Leader>ci 以每行一个 /* */ 注释选中行(选中区域所在行)，再输入则取消注释
+" <Leader>cm 以一个 /* */ 注释选中行(选中区域所在行)，再输入则称重复注释
+" <Leader>cc 以每行一个 /* */ 注释选中行或区域，再输入则称重复注释
+" <Leader>cu 取消选中区域(行)的注释，选中区域(行)内至少有一个 /* */
+" <Leader>ca 在/*...*/与//这两种注释方式中切换（其它语言可能不一样了）
+" <Leader>cA 行尾注释
+" <Leader>c$ 从光标处注释到行尾
+" 避免麻烦，直接使用ci进行整行注释， 在行莫写注释用cA,
+" 如果要使用不同注释风格的话，使用ca进行切换
+let NERDSpaceDelims = 1                     "在左注释符之后，右注释符之前留有空格
+
+" -----------------------------------------------------------------------------
+"  < ctrlp 插件配置 >
+" -----------------------------------------------------------------------------
+" 默认配置下，使用<c-p> 打开ctrlp插件
+" 以下为插件默认快捷键
+" Press <c-f> and <c-b> to cycle between modes ,就是在mru(Most Recently Used (MRU)),files,buf之间进行切换
+" <c-d> 只在文件名字查找
+" <c-r> 切换到正则表达式模式
+" <c-j>, <c-k> 在列表中进行上下文滚动
+" <c-t> 在新tab中打开文件
+" <c-x> 上下文分割
+" <c-v>  左右分割
+" <c-p>,<c-n> 查找历史搜索记录
+" <c-z> 用来选择/取消 选择的文件，<c-o> 来打开选择的文件
+" 设置忽略文件时，使用 vim自带的wildignore and CtrlP's own g:ctrlp_custom_ignore:
+"
+set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store  " MacOSX/Linux"
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 
 
 
@@ -839,19 +877,6 @@ let g:neocomplcache_enable_at_startup = 1     "vim 启动时启用插件
 " let g:neocomplcache_disable_auto_complete = 1 "不自动弹出补全列表
 " 在弹出补全列表后用 <c-p> 或 <c-n> 进行上下选择效果比较好
  
-" -----------------------------------------------------------------------------
-"  < nerdcommenter 插件配置 >
-" -----------------------------------------------------------------------------
-" 我主要用于C/C++代码注释(其它的也行)，这个插件我做了小点修改，也就是在注释符
-" 与注释内容间加一个空格
-" 以下为插件默认快捷键，其中的说明是以C/C++为例的
-" <Leader>ci 以每行一个 /* */ 注释选中行(选中区域所在行)，再输入则取消注释
-" <Leader>cm 以一个 /* */ 注释选中行(选中区域所在行)，再输入则称重复注释
-" <Leader>cc 以每行一个 /* */ 注释选中行或区域，再输入则称重复注释
-" <Leader>cu 取消选中区域(行)的注释，选中区域(行)内至少有一个 /* */
-" <Leader>ca 在/*...*/与//这两种注释方式中切换（其它语言可能不一样了）
-" <Leader>cA 行尾注释
-let NERDSpaceDelims = 1                     "在左注释符之后，右注释符之前留有空格
  
  
 " -----------------------------------------------------------------------------
@@ -913,7 +938,12 @@ let c_cpp_comments = 0
 " -----------------------------------------------------------------------------
 "  < Syntastic 插件配置 >
 " -----------------------------------------------------------------------------
-" 用于保存文件是查检语法
+" 用于保存文件是查检语法,个人觉得脚本语言用处更大
+let g:syntastic_check_on_open = 1 "打开文件时候就检查语法错误,默认不开启,为0
+let g:syntastic_check_on_wq = 0  "保存文件时候，进行语法错误检查，默认开启，为1
+let g:syntastic_ignore_files=[".*\.py$"] "设置忽略的文件类型,默认为[]
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd'] "设置某种文件类型的checkers，此处设置的是phpde，如果是phthon的话，则为g:syntastic_python_checkers
+"各种语法的check需要在vim/bundle/syntastic/syntax_checkers目录下去查看需要装何种类型的命令，比如.vim/bundle/syntastic/syntax_checkers/php目录下有php.vim，phpmd.vim，phpcs.vim三个文件，说明插件需要依赖php,phpmd或者phpcs命令来进行语法check
  
 " -----------------------------------------------------------------------------
 "  < Tagbar 插件配置 >
