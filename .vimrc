@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"i""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
 "       name = jibing57 
 "       mail = 
@@ -159,6 +159,8 @@ Bundle 'scrooloose/syntastic'
 
 " 正在试验的插件
 " https://github.com/jistr/vim-nerdtree-tabs  打开新标签时，也能自动打开 NerdTree 需要好好看一下
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'Shougo/neocomplcache'
 
 " 还需要看的插件
 """""""还没有消化的插件
@@ -265,10 +267,10 @@ set wildmenu
 set autoread
  
 " 常规模式下输入 ,cS 清除行尾空格
-nmap <leader>cS :%s/\s\+$//g<cr>:noh<cr>
+" nmap <leader>cS :%s/\s\+$//g<cr>:noh<cr>
  
 " 常规模式下输入 ,cM 清除行尾 ^M 符号
-nmap <leader>cM :%s/\r$//g<cr>:noh<cr>
+" nmap <leader>cM :%s/\r$//g<cr>:noh<cr>
  
 set ignorecase                                        "搜索模式里忽略大小写
 set smartcase                                         "如果搜索模式包含大写字符，不使用 'ignorecase' 选项，只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用
@@ -376,8 +378,8 @@ endfunc
 
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
-autocmd BUfWrite *.c :call DeleteTrailingWS()
-autocmd BUfWrite *.cc :call DeleteTrailingWS()
+"autocmd BUfWrite *.c :call DeleteTrailingWS()
+"autocmd BUfWrite *.cc :call DeleteTrailingWS()
 
 
 " 设置字典
@@ -685,6 +687,13 @@ set nobackup                                "设置无备份文件
 set vb t_vb=                                "关闭提示音
 
 
+" -----------------------------------------------------------------------------
+"  < jibing57 coding 习惯配置 >
+" -----------------------------------------------------------------------------
+nnoremap <Leader>ll idebug_fprintf(stderr, "[%s] --.\n", function);<ESC>F-a<Space>
+inoremap <Leader>ll debug_fprintf(stderr, "[%s] --.\n", function);<ESC>F-a<Space>
+" inoremap <Leader>ff <c-r>% "插入文件名字, 如何自动插入函数的名字??? shenhg
+
  
 " =============================================================================
 "                          << 以下为常用插件配置 >>
@@ -824,7 +833,7 @@ let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 "  < cSyntaxAfter 插件配置 >
 " -----------------------------------------------------------------------------
 " 高亮括号与运算符等
-au! BufRead,BufNewFile,BufEnter *.{c,cpp,h,javascript} call CSyntaxAfter()
+" ??? shenhg tmp del au! BufRead,BufNewFile,BufEnter *.{c,cpp,h,javascript} call CSyntaxAfter()
  
 " -----------------------------------------------------------------------------
 "  < indentLine 插件配置 >
