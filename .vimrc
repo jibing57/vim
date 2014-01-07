@@ -161,6 +161,7 @@ Bundle 'scrooloose/syntastic'
 " https://github.com/jistr/vim-nerdtree-tabs  打开新标签时，也能自动打开 NerdTree 需要好好看一下
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Shougo/neocomplcache'
+Bundle 'Mark-Karkat'
 
 " 还需要看的插件
 """""""还没有消化的插件
@@ -180,7 +181,6 @@ Bundle 'Shougo/neocomplcache'
 """""""original repos on github（Github网站上非vim-scripts仓库的插件，按下面格式填写） 
 """"""Bundle 'jiangmiao/auto-pairs'
 """"""Bundle 'Yggdroot/indentLine'
-""""""" Bundle 'breestealth/Mark-Karkat'
 """"""" Bundle 'fholgado/minibufexpl.vim' "这个上的6.4.4版本与 Vundle 插件有一些冲突
 """"""Bundle 'Shougo/neocomplcache'
 """"""Bundle 'FromtonRouge/OmniCppComplete'
@@ -765,6 +765,7 @@ let NERDTreeIgnore += ['\.swp$']
 " <Leader>ca 在/*...*/与//这两种注释方式中切换（其它语言可能不一样了）
 " <Leader>cA 行尾注释
 " <Leader>c$ 从光标处注释到行尾
+" <Leader>cs 以性感的方式进行注释，取消注释使用<Leader>cu 
 " 避免麻烦，直接使用ci进行整行注释， 在行莫写注释用cA,
 " 如果要使用不同注释风格的话，使用ca进行切换
 let NERDSpaceDelims = 1                     "在左注释符之后，右注释符之前留有空格
