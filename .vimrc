@@ -1,4 +1,4 @@
-"i""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
 "       name = jibing57 
 "       mail = 
@@ -376,10 +376,10 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-"autocmd BUfWrite *.c :call DeleteTrailingWS()
-"autocmd BUfWrite *.cc :call DeleteTrailingWS()
+" autocmd BufWrite *.py :call DeleteTrailingWS()
+" autocmd BufWrite *.coffee :call DeleteTrailingWS()
+" autocmd BUfWrite *.c :call DeleteTrailingWS()
+" autocmd BUfWrite *.cc :call DeleteTrailingWS()
 
 
 " 设置字典
@@ -690,9 +690,23 @@ set vb t_vb=                                "关闭提示音
 " -----------------------------------------------------------------------------
 "  < jibing57 coding 习惯配置 >
 " -----------------------------------------------------------------------------
-nnoremap <Leader>ll idebug_fprintf(stderr, "[%s] --.\n", function);<ESC>F-a<Space>
-inoremap <Leader>ll debug_fprintf(stderr, "[%s] --.\n", function);<ESC>F-a<Space>
+" nnoremap <Leader>ll idebug_fprintf(stderr, "[%s] --.\n", function);<ESC>F-a<Space>
+" inoremap <Leader>ll debug_fprintf(stderr, "[%s] --.\n", function);<ESC>F-a<Space>
+
+" nnoremap <Leader>ll isyslog(LOG_ERR, "iCityError CODE=C.\n");<ESC>FCa
+" inoremap <Leader>ll syslog(LOG_ERR, "iCityError CODE=C.\n", function);<ESC>FCa
 " inoremap <Leader>ff <c-r>% "插入文件名字, 如何自动插入函数的名字??? shenhg
+
+" nnoremap <Leader>ee isyslog(LOG_ERR, "iCityError CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
+" inoremap <Leader>ee syslog(LOG_ERR, "iCityError CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
+
+" nnoremap <Leader>ww isyslog(LOG_WARNING, "iCityWarning CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
+" inoremap <Leader>ww syslog(LOG_WARNING, "iCityWarning CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
+
+" nnoremap <Leader>ii isyslog(LOG_INFO, "iCityInfo CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
+" inoremap <Leader>ii syslog(LOG_INFO, "iCityInfo CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
+
+
 
  
 " =============================================================================
@@ -834,7 +848,7 @@ let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 "  < cSyntaxAfter 插件配置 >
 " -----------------------------------------------------------------------------
 " 高亮括号与运算符等
-" ??? shenhg tmp del au! BufRead,BufNewFile,BufEnter *.{c,cpp,h,javascript} call CSyntaxAfter()
+"  jibing 注释 au! BufRead,BufNewFile,BufEnter *.{c,cpp,h,javascript} call CSyntaxAfter()
  
 " -----------------------------------------------------------------------------
 "  < indentLine 插件配置 >
@@ -883,11 +897,25 @@ noremap <c-l> <c-w>l
 "  < neocomplcache 插件配置 >
 " -----------------------------------------------------------------------------
 " 关键字补全、文件路径补全、tag补全等等，各种，非常好用，速度超快。
-let g:neocomplcache_enable_at_startup = 1     "vim 启动时启用插件
+let g:neocomplcache_enable_at_startup = 0     "vim 启动时启用插件 0- no use, 1 - use
 " let g:neocomplcache_disable_auto_complete = 1 "不自动弹出补全列表
 " 在弹出补全列表后用 <c-p> 或 <c-n> 进行上下选择效果比较好
- 
- 
+" jibing57 添加
+let g:AutoComplPop_NotEnableAtStartup = 1
+let g:NeoComplCache_EnableAtStartup = 1
+let g:NeoComplCache_SmartCase = 1
+let g:NeoComplCache_TagsAutoUpdate = 1
+let g:NeoComplCache_EnableInfo = 1
+let g:NeoComplCache_EnableCamelCaseCompletion = 1
+let g:NeoComplCache_MinSyntaxLength = 3
+let g:NeoComplCache_EnableSkipCompletion = 1
+let g:NeoComplCache_SkipInputTime = '0.5'
+let g:NeoComplCache_SnippetsDir = $VIMFILES.'/snippets'
+" <TAB> completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" snippets expand key
+imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
+smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
  
 " -----------------------------------------------------------------------------
 "  < omnicppcomplete 插件配置 >
