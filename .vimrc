@@ -707,6 +707,8 @@ set vb t_vb=                                "关闭提示音
 " inoremap <Leader>ii syslog(LOG_INFO, "iCityInfo CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
 
 
+nnoremap <Leader>mdl 0i{% highlight %}<CR>{% endhighlight %}<ESC>k0fta<Space>
+inoremap <Leader>mdl <ESC>0i{% highlight %}<CR>{% endhighlight %}<ESC>k0fta<Space>
 
  
 " =============================================================================
@@ -1111,8 +1113,8 @@ endif
 "                          << 以下为常用自动命令配置 >>
 " =============================================================================
  
-" 自动切换目录为当前编辑文件所在目录
-au BufRead,BufNewFile,BufEnter * cd %:p:h
+" 自动切换目录为当前编辑文件所在目录 --  不怎么好用，ctrl-p的时候查找文件不方便
+" au BufRead,BufNewFile,BufEnter * cd %:p:h
  
 " =============================================================================
 "                          << 其它 >>
