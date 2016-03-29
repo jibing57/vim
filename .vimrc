@@ -162,6 +162,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Mark-Karkat'
+Bundle 'airblade/vim-gitgutter'
 
 " 还需要看的插件
 """""""还没有消化的插件
