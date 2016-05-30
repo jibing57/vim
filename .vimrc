@@ -790,8 +790,12 @@ let g:vim_json_syntax_conceal = 0
 " 配置自己的leader命令为,避免同插件里面的\相冲突
 " let mapleader = ","
 " let g:mapleader = ","
+" theme主题
+" set background=dark       " background=dark|light
+set t_Co=256
 
 colorscheme molokai
+" colorscheme solarized
 " colorscheme Tomorrow-Night-Eighties
 " colorscheme Tomorrow-Night-Blue  -- discard
 " colorscheme Tomorrow-Night-Bright
@@ -1134,6 +1138,11 @@ if has("autocmd")
     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
   endif
 endif
+
+" 设置标记一列的背景颜色和数字一行颜色一致
+hi! link SignColumn   LineNr
+hi! link ShowMarksHLl DiffAdd
+hi! link ShowMarksHLu DiffChange
 
 " for error highlight，防止错误整行标红导致看不清 -- 暂时没用过
 " highlight clear SpellBad
