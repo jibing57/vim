@@ -973,11 +973,18 @@ endfunction
 " 删除代码行后面多余的空格
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
+  " 老代码删除使用下面未注释的新代码
+  " ====== old version start =======
   "特殊处理 加了plugin kshenoy/vim-signature后，同一行输入两次ma,第二次会取消a的mark，导致下面normal `z会出错，所以需要先加上normal dmz
-  exe "normal dmz"
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
+  " exe "normal dmz"
+  " exe "normal mz"
+  " %s/\s\+$//ge
+  " exe "normal `z"
+  " ====== old version end =======
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
 endfunc
 
 autocmd BufWrite * :call DeleteTrailingWS()   "所有文件都删除后面多余的空格
@@ -1119,23 +1126,28 @@ autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要
 
 set isk+=-                                  "将-连接符也设置为单词
 
+" 设置可以高亮的关键字
+if has("autocmd")
+  " Highlight TODO, FIXME, NOTE, etc.
+  if v:version > 701
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
+    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
+  endif
+endif
+
+" for error highlight，防止错误整行标红导致看不清 -- 暂时没用过
+" highlight clear SpellBad
+" highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+" highlight clear SpellCap
+" highlight SpellCap term=underline cterm=underline
+" highlight clear SpellRare
+" highlight SpellRare term=underline cterm=underline
+" highlight clear SpellLocal
+" highlight SpellLocal term=underline cterm=underline
+
 " -----------------------------------------------------------------------------
 "  < jibing57 coding 习惯配置 >
 " -----------------------------------------------------------------------------
-
-" nnoremap <Leader>ee isyslog(LOG_ERR, "Error CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
-" inoremap <Leader>ee syslog(LOG_ERR, "Error CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
-
-" nnoremap <Leader>ww isyslog(LOG_WARNING, "Warning CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
-" inoremap <Leader>ww syslog(LOG_WARNING, "Warning CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
-
-" nnoremap <Leader>ii isyslog(LOG_INFO, "Info CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
-" inoremap <Leader>ii syslog(LOG_INFO, "Info CODE=C .\n");<ESC>FCl"=strpart(strftime("%Y%m%d%H%M%S"),5,9)<CR>Pa<Space>
-
-
-
-
-
 
 
 syntax on
