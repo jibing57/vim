@@ -517,6 +517,12 @@ Bundle 'elzr/vim-json'
   " let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
   " let g:ycm_server_use_vim_stdout = 1
   " let g:ycm_server_log_level = 'debug'
+  let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+  let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+  let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+  let g:ycm_collect_identifiers_from_tags_files = 1
+  " 开启语法关键字补全
+  let g:ycm_seed_identifiers_with_syntax=1
 " -----------------------------------------------------------------------------
 " -----------------------------------------------------------------------------
 
@@ -791,15 +797,19 @@ let g:vim_json_syntax_conceal = 0
 " let mapleader = ","
 " let g:mapleader = ","
 " theme主题
-" set background=dark       " background=dark|light
+set background=dark       " background=dark|light
 set t_Co=256
 
-colorscheme molokai
+" colorscheme molokai
 " colorscheme solarized
+
+"终端配色方案 -- 需要找一下https://github.com/chriskempson/tomorrow-theme
 " colorscheme Tomorrow-Night-Eighties
-" colorscheme Tomorrow-Night-Blue  -- discard
-" colorscheme Tomorrow-Night-Bright
+colorscheme Tomorrow-Night-Bright
 " colorscheme Tomorrow-Night
+
+" colorscheme Tomorrow-Night-Blue  " -- discard
+" colorscheme Tomorrow
 
 " history存储容量
 set history=2000
@@ -859,7 +869,7 @@ set showmatch                           "插入括号时，短暂的跳到对应
 set hidden                              "允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
 
 " 使用j/k的时候，光标以下最少显示的行数，即光标永远不会在最后一行
-set scrolloff=3      "so = scrolloff
+set scrolloff=7      "so = scrolloff
 
 "在命令模式下使用 Tab 自动补全的时候，将补全内容使用一个漂亮的单行菜单形式显示出来, 超酷
 set wildmenu
@@ -1027,7 +1037,7 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 map <leader>pp :setlocal paste!<cr>
 
 " disbale paste mode when leaving insert mode
-au InsertLeave * set nopaste
+" au InsertLeave * set nopaste
 
 "使用tab键来代替%进行匹配跳转
 nmap <tab> %
@@ -1089,7 +1099,6 @@ set t_ti= t_te=
 set wrap                                                "设置自动换行
 set shortmess=atI                                     "去掉欢迎界面
 
-" colorscheme Tomorrow-Night-Eighties               "终端配色方案 -- 需要找一下https://github.com/chriskempson/tomorrow-theme
 
 " 个性化状栏（这里提供两种方式，要使用其中一种去掉注释即可，不使用反之）<--
 " 另外使用plugin
@@ -1128,7 +1137,7 @@ set vb t_vb=                                "关闭提示音
 
 autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要重启
 
-set isk+=-                                  "将-连接符也设置为单词
+" set isk+=-                                  "将-连接符也设置为单词
 
 " 设置可以高亮的关键字
 if has("autocmd")
