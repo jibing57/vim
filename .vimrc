@@ -153,6 +153,7 @@ if !g:iswindows
 endif
 
 
+" set t_Co=256                   " 在终端启用256色
 set nocompatible          "不要兼容vi
 filetype off              "必须的设置：
 
@@ -329,6 +330,11 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 
 Bundle 'elzr/vim-json'
+
+" 自动格式化、标准化中文排版,
+" 来源于 https://github.com/sparanoid/chinese-copywriting-guidelines
+Bundle "hotoo/pangu.vim"
+
 
 " bundle_start
 
@@ -788,6 +794,21 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:vim_json_syntax_conceal = 0
 " -----------------------------------------------------------------------------
 " -----------------------------------------------------------------------------
+
+" -----------------------------------------------------------------------------
+" 自动格式化、标准化中文排版,
+" 来源于 https://github.com/sparanoid/chinese-copywriting-guidelines
+" Bundle "hotoo/pangu.vim"
+" -----------------------------------------------------------------------------
+" 设置按照文档类型自动开启格式
+  " autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+" 手动命令:
+" :Pangu "手动执行该命令，将当前文件进行规范化。
+" :PanguDisable "禁止自动规范化
+" :PanguEnable "启用自动规范化
+" -----------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
+
 " config_end_flg
 
 " =============================================================================
