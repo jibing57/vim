@@ -1170,23 +1170,5 @@ hi! link ShowMarksHLu DiffChange
 
 syntax on
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+" highlight LineNr ctermfg=grey    " 配置行号为灰色"
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE    " 配置行号为灰色"
