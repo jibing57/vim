@@ -718,6 +718,9 @@ let g:airline_right_sep = '◀'
 let g:airline_right_alt_sep = '❮'
 let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
+" 修改airline theme为molokai, 当为tomorrow的theme时, 不是激活窗口的statusline一片漆黑
+let g:airline_theme = 'molokai'
+" let g:airline_theme = 'solarized'
 " 是否打开tabline
 " let g:airline#extensions#tabline#enabled = 1
 " -----------------------------------------------------------------------------
@@ -826,7 +829,7 @@ set t_Co=256
 
 "终端配色方案 -- 需要找一下https://github.com/chriskempson/tomorrow-theme
 " colorscheme Tomorrow-Night-Eighties
-colorscheme Tomorrow-Night-Bright
+colorscheme Tomorrow-Night-Bright  "best"
 " colorscheme Tomorrow-Night
 
 " colorscheme Tomorrow-Night-Blue  " -- discard
