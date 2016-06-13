@@ -529,6 +529,18 @@ Bundle "hotoo/pangu.vim"
   let g:ycm_collect_identifiers_from_tags_files = 1
   " 开启语法关键字补全
   let g:ycm_seed_identifiers_with_syntax=1
+  " 打开markdown, text文件的自动补全, 从g:ycm_filetype_blacklist 中删除markdown
+  let g:ycm_filetype_blacklist = {
+        \ 'tagbar' : 1,
+        \ 'qf' : 1,
+        \ 'notes' : 1,
+        \ 'unite' : 1,
+        \ 'text' : 1,
+        \ 'vimwiki' : 1,
+        \ 'pandoc' : 1,
+        \ 'infolog' : 1,
+        \ 'mail' : 1
+        \}
 " -----------------------------------------------------------------------------
 " -----------------------------------------------------------------------------
 
@@ -671,6 +683,7 @@ au FileType php let delimitMate_matchpairs = "(:),[:],{:}"
 " 自动补全html/xml标签
 " Bundle 'docunext/closetag.vim'
 " -----------------------------------------------------------------------------
+" 开启此插件时,黏贴xml,html的时候，千万别忘记设置:setlocal paste! 后在黏贴，否则可能会卡死
 let g:closetag_html_style=1
 " -----------------------------------------------------------------------------
 " -----------------------------------------------------------------------------
