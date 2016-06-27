@@ -295,7 +295,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 
 " 自动补全html/xml标签
-Bundle 'docunext/closetag.vim'
+" Bundle 'docunext/closetag.vim'
 
 " easyalign
 " 快速赋值语句对齐
@@ -951,6 +951,11 @@ imap <c-l> <Right>
 map j gj
 map k gk
 
+" 设置了wrap后，因为同一样会折行，因此会印象每一行的v:count的计数，单纯的map j gj，会将自动换行计数为大于一行，导致问题，采用如下方法解决，
+" 参考:http://stackoverflow.com/a/21000307 https://blog.petrzemek.net/2016/04/06/things-about-vim-i-wish-i-knew-earlier/
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
 " 在不使用 MiniBufExplorer 插件时也可用<C-k,j,h,l>切换到上下左右的窗口中去
 noremap <c-k> <c-w>k
 noremap <c-j> <c-w>j
@@ -1098,6 +1103,19 @@ vmap <leader>p "+p
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
+
+" Fn快捷键映射
+" F6 语法开关，关闭语法可以加快大文件的展示
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
+" Automatically set paste mode in Vim when pasting in insert mode
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
 " -----------------------------------------------------------------------------
 "  < 界面配置 >
 " -----------------------------------------------------------------------------
@@ -1206,6 +1224,8 @@ hi! link ShowMarksHLu DiffChange
 
 
 syntax on
+" 设置对于xml和文本文件，语法关闭，避免打开文件卡顿, 如果需要，可以手动:syntax on 打开
+autocmd FileType xml,text setlocal syntax=off
 
 " highlight LineNr ctermfg=grey    " 配置行号为灰色"
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE    " 配置行号为灰色"
