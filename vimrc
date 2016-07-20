@@ -698,6 +698,7 @@ let g:closetag_html_style=1
 " 快速赋值语句对齐
 " Bundle 'junegunn/vim-easy-align'
 " -----------------------------------------------------------------------------
+"  v 选中区域，然后,a+对齐的符号， 例如以#对齐就是 ,a#
 vmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 if !exists('g:easy_align_delimiters')
