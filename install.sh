@@ -35,7 +35,7 @@ export SHELL=$system_shell
 echo "Step4: compile YouCompleteMe"
 echo "It will take a long time, just be patient!"
 echo "If error,you need to compile it yourself"
-echo "cd $CURRENT_DIR/vim/bundle/YouCompleteMe/ && python install.py --clang-completer"
+echo "cd $CURRENT_DIR/vim/bundle/YouCompleteMe/ && python3 install.py --clang-completer"
 cd $CURRENT_DIR/vim/bundle/YouCompleteMe/
 youcompleteme_clang_complete=""
 # youcompleteme_clang_complete="--clang-completer"
@@ -43,10 +43,10 @@ git submodule update --init --recursive
 if [ `which clang` ]   # check system clang
 then
     # python install.py --clang-completer --system-libclang   # use system clang
-    python install.py    # use system clang
+    python3 install.py    # use system clang
 else
     # python install.py --clang-completer
-    python install.py
+    python3 install.py
 fi
 
 echo "Install Done!"
